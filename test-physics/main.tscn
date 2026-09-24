@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://do4xclaf3v0kk"]
+
+[ext_resource type="Script" uid="uid://bqwtxmbw507ug" path="res://ball.gd" id="1_ig7tw"]
+
+[sub_resource type="Environment" id="Environment_k1hu2"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qx8g6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k1hu2"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_k1hu2"]
+size = Vector2(40, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
+albedo_color = Color(0.65882355, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(40, 0.001, 2)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qx8g6"]
+bounce = 0.43
+
+[sub_resource type="SphereMesh" id="SphereMesh_a1qq8"]
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dm0k"]
+albedo_color = Color(0.90587693, 0.5664861, 0.9130072, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7dm0k"]
+radius = 0.2
+
+[node name="Main" type="Node3D" unique_id=729636488]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1703252823]
+environment = SubResource("Environment_k1hu2")
+camera_attributes = SubResource("CameraAttributesPractical_qx8g6")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=755138024]
+physics_material_override = SubResource("PhysicsMaterial_k1hu2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1971168878]
+mesh = SubResource("PlaneMesh_k1hu2")
+surface_material_override/0 = SubResource("StandardMaterial3D_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=576535140]
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2076785712]
+transform = Transform3D(1, 0, 0, 0, 0.042357598, 0.99910253, 0, -0.99910253, 0.042357598, 0, 2.4603004, 0)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1639933788]
+transform = Transform3D(1, 0, 0, 0, 0.81086373, 0.585235, 0, -0.585235, 0.81086373, 0, 2.7743154, 4.062481)
+
+[node name="Ball" type="RigidBody3D" parent="." unique_id=177751151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+physics_material_override = SubResource("PhysicsMaterial_qx8g6")
+script = ExtResource("1_ig7tw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball" unique_id=1624127871]
+mesh = SubResource("SphereMesh_a1qq8")
+surface_material_override/0 = SubResource("StandardMaterial3D_7dm0k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball" unique_id=948747844]
+shape = SubResource("SphereShape3D_7dm0k")
+
+[node name="BallSpeed" type="Label" parent="." unique_id=2077309493]
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 42.0
+offset_bottom = 26.0
+
+[node name="BallPosition" type="Label" parent="." unique_id=1766610076]
+offset_top = 33.0
+offset_right = 40.0
+offset_bottom = 56.0
+
+[node name="CurrentTime" type="Label" parent="." unique_id=636339074]
+offset_top = 58.0
+offset_right = 40.0
+offset_bottom = 81.0
+
+[node name="SpeedSetPoint" type="LineEdit" parent="." unique_id=11968006]
+offset_top = 84.0
+offset_right = 68.5
+offset_bottom = 115.0
+text = "0.5"
